@@ -1,6 +1,7 @@
 import React, { useEffect} from 'react';
 import { connect } from 'react-redux';
 import { getUsersRequest } from '../actions/users';
+import UsersList from './UsersList';
 
 const App = (props) => {
 
@@ -13,7 +14,7 @@ const App = (props) => {
 
   return (
     <div style={{ margin: "0 auto", padding: "20px", maxWidth: "600px" }}>
-      test
+      <UsersList users={props.users.items} />
     </div>
   );
 }
