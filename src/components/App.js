@@ -2,6 +2,7 @@ import React, { useEffect} from 'react';
 import { connect } from 'react-redux';
 import { getUsersRequest } from '../actions/users';
 import UsersList from './UsersList';
+import NewUserForm from './NewUserForm';
 
 const App = (props) => {
 
@@ -12,9 +13,14 @@ const App = (props) => {
 
   const users = props.users;
 
+  const handleSubmit = ({firstName, lastName}) => {
+    console.log(firstName, lastName)
+  }
+
   return (
     <div style={{ margin: "0 auto", padding: "20px", maxWidth: "600px" }}>
-      <UsersList users={props.users.items} />
+      <NewUserForm onSubmit={handleSubmit} />
+      <UsersList users={users.items} />
     </div>
   );
 }

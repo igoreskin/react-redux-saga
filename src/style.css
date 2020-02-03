@@ -1,0 +1,3 @@
+*:focus, *:active, *:visited {
+    outline: none !important;
+}
