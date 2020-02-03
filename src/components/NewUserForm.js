@@ -3,38 +3,34 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 const NewUserForm = (props) => {
 
-    const [state, setState] = useState({
+    const [form, setForm] = useState({
         firstName: '',
         lastName: ''
     });
 
-    const handleFirstNameChange = (e) => {
-        setState({ ...state, firstName: e.target.value })
-    }
-
-    const handleLastNameChange = (e) => {
-        setState({ ...state, lastName: e.target.value})
+    const handleNameChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = (e) => {
         console.log("Clicked");
         e.preventDefault();
         props.onSubmit({
-            firstName: state.firstName,
-            lastName: state.lastName
+            firstName: form.firstName,
+            lastName: form.lastName
         });
-        setState({firstName: '', lastName: ''});
+        setForm({firstName: '', lastName: ''});
     }
 
     return (
         <Form onSubmit={handleSubmit}>
             <FormGroup>
                 <Label>First Name</Label>
-                <Input required placeholder="First Name" value={state.firstName} onChange={handleFirstNameChange} />
+                <Input required name="firstName" placeholder="First Name" value={form.firstName} onChange={handleNameChange} />
             </FormGroup>
             <FormGroup>
                 <Label>Last Name</Label>
-                <Input required placeholder="Last Name" value={state.lastName} onChange={handleLastNameChange} />
+                <Input required name="lastName" placeholder="Last Name" value={form.lastName} onChange={handleNameChange} />
             </FormGroup>
             <FormGroup>
                 <Button block outline type="submit" color="primary">Create</Button>
