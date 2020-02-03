@@ -12,4 +12,4 @@ export const getUsersSucess = ({items}) => ({
     payload: {
         items
     }
-})
+});
