@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react';
 import { connect } from 'react-redux';
-import { getUsersRequest } from '../actions/users';
+import { getUsersRequest, createUserRequest, deleteUserRequest } from '../actions/users';
 import UsersList from './UsersList';
 import NewUserForm from './NewUserForm';
 
@@ -14,17 +14,23 @@ const App = (props) => {
   const users = props.users;
 
   const handleSubmit = ({firstName, lastName}) => {
-    console.log(firstName, lastName)
+    props.createUserRequest({firstName, lastName});
+  }
+
+  const handleDeleteUserClick = (userId) => {
+    props.deleteUserRequest(userId);
   }
 
   return (
     <div style={{ margin: "0 auto", padding: "20px", maxWidth: "600px" }}>
       <NewUserForm onSubmit={handleSubmit} />
-      <UsersList users={users.items} />
+      <UsersList users={users.items} onDeleteUser={handleDeleteUserClick} />
     </div>
   );
 }
 
 export default connect(({users}) => ({users}), {
-  getUsersRequest
+  getUsersRequest,
+  createUserRequest,
+  deleteUserRequest
 })(App);

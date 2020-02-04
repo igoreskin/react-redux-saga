@@ -13,7 +13,6 @@ const NewUserForm = (props) => {
     }
 
     const handleSubmit = (e) => {
-        console.log("Clicked");
         e.preventDefault();
         props.onSubmit({
             firstName: form.firstName,
