@@ -1,8 +1,9 @@
 import React, { useEffect} from 'react';
 import { connect } from 'react-redux';
-import { getUsersRequest, createUserRequest, deleteUserRequest } from '../actions/users';
+import { getUsersRequest, createUserRequest, deleteUserRequest, usersError } from '../actions/users';
 import UsersList from './UsersList';
 import NewUserForm from './NewUserForm';
+import { Alert } from 'reactstrap';
 
 const App = (props) => {
 
@@ -21,8 +22,15 @@ const App = (props) => {
     props.deleteUserRequest(userId);
   }
 
+  const handleCloseAlert = () => {
+    props.usersError({error: ''});
+  }
+
   return (
     <div style={{ margin: "0 auto", padding: "20px", maxWidth: "600px" }}>
+      <Alert color="danger" isOpen={!!props.users.error} toggle={handleCloseAlert}>
+        {props.users.error}
+      </Alert>
       <NewUserForm onSubmit={handleSubmit} />
       <UsersList users={users.items} onDeleteUser={handleDeleteUserClick} />
     </div>
@@ -32,5 +40,6 @@ const App = (props) => {
 export default connect(({users}) => ({users}), {
   getUsersRequest,
   createUserRequest,
-  deleteUserRequest
+  deleteUserRequest,
+  usersError
 })(App);
